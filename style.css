@@ -1,0 +1,984 @@
+/*========================== RESET ===========*/
+
+* {
+  margin: 0;
+  padding: 0;
+  border: none;
+  box-sizing: border-box;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+  color: var(--text-color);
+  font-style: italic;
+}
+
+img {
+  width: 100%;
+  height: auto;
+}
+
+/*  ==================================== VARIABLES ======== */
+:root {
+  --base-color: #0c60e7;
+  --base-color-second: rgb(104, 0, 173, 5);
+  --base-color-alt: #001d6e;
+  --title-color: #0c60e7;
+  --text-color: rgb(255, 255, 255);
+  --text-color-light: hsl(0 0% 98%);
+  --boyd-color: rgb(0, 0, 0);
+
+  /*- fonts -*/
+  --title-font-size: 1.875rem;
+  --subtitle-font-size: 1rem;
+
+  --title-font: "Poppins", sans-serif;
+  --body-font: "DM Sans", sans-serif;
+}
+
+/* ==================================== BASE ================ */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font: 400 var(--subtitle-font-size) var(--body-font);
+  color: var(--text-color);
+  background: var(--boyd-color);
+  -webkit-font-smoothing: antialiased;
+}
+
+.title {
+  font: 700 var(--title-font-size) var(--title-font);
+  color: var(--title-color);
+  -webkit-font-smoothing: auto;
+}
+
+.button {
+  background-color: var(--base-color);
+  color: var(--text-color-light);
+  height: 3.5rem;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 2rem;
+  border-radius: 0.25rem;
+  font: 500 var(--subtitle-font-size) var(--body-font);
+  transition: filter 0.3s;
+}
+
+.button:hover {
+  filter: brightness(1.4);
+}
+
+.divider-1 {
+  height: 2px;
+  background: linear-gradient(270deg, rgb(255, 255, 255), #0c60e7(271, 100%, 50%));
+}
+
+.divider-2 {
+  height: 2px;
+  background: linear-gradient(270deg, #0c60e7(271, 100%, 50%), rgb(255, 255, 255));
+}
+/*==================================  LAYOUT   ======================*/
+
+.container {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+.grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.section {
+  padding: 7rem 0;
+}
+
+.section .title {
+  margin-bottom: 1rem;
+}
+
+.section .subtitle {
+  font-size: var(--subtitle-font-size);
+}
+
+.section header strong {
+  color: var(--base-color);
+}
+
+#header {
+  border-bottom: 1px solid var(--boyd-color);
+  margin-bottom: 2rem;
+  display: flex;
+
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  background-color: var(--boyd-color);
+  box-shadow: 0 0 5px #0c60e7(122, 0, 192);
+
+  transition: 0.3s;
+}
+
+#header.scroll {
+  background: linear-gradient(#0c60e7(122 0 192) 0%, #0c60e7(104 0 173 / 90%) 100%);
+  box-shadow: 0 0 5px rgb(211, 211, 211);
+  border-color: var(--base-color);
+}
+
+#header.scroll .logo span {
+  color: var(--boyd-color);
+  transition: 0.3s;
+}
+
+#header.scroll .icon-menu {
+  color: var(--boyd-color);
+  transition: 0.3s;
+}
+
+/* ==================================== LOGO ==================*/
+
+.logo {
+  font: 700 1.31rem var(--title-font);
+  color: var(--text-color);
+}
+
+.logo span {
+  color: var(--base-color-second);
+}
+
+.logo-alt span {
+  color: var(--boyd-color);
+}
+
+/* ==================================== NAVIGATION ===============*/
+
+nav {
+  height: 4.5rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul li {
+  text-align: center;
+}
+
+nav ul li a {
+  transition: color 0.2s;
+  position: relative;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+  color: var(--text-color-light);
+}
+
+nav ul li a::after {
+  content: "";
+  width: 0%;
+  height: 2px;
+  background: var(--text-color-light);
+
+  position: absolute;
+  left: 0;
+  bottom: -1.5rem;
+
+  transition: width 0.2s;
+}
+
+nav ul li a:hover::after,
+nav ul li a.active::after {
+  width: 100%;
+}
+
+nav .menu {
+  opacity: 0;
+  visibility: hidden;
+  top: -20rem;
+  transition: 0.2s;
+}
+
+nav .menu ul {
+  display: none;
+}
+
+/* ===== MOSTRAR MENU ==== */
+
+nav.show .menu {
+  opacity: 1;
+  visibility: visible;
+
+  background: var(--boyd-color);
+  height: 100vh;
+  width: 100vw;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-content: center;
+}
+
+nav.show .menu ul {
+  display: grid;
+}
+
+nav.show ul.grid {
+  gap: 4rem;
+}
+
+/* ===== TOGGLE MENU ==== */
+.toggle {
+  color: var(--base-color);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+nav .icon-close {
+  visibility: hidden;
+  opacity: 0;
+
+  position: absolute;
+  top: -1.5rem;
+  right: 1.5rem;
+  /* TRANSIÇÃO */
+  transition: 0.2s;
+}
+
+nav.show div.icon-close {
+  visibility: visible;
+  opacity: 1;
+  top: 1.5rem;
+}
+
+/* ======================================= HOME =================================*/
+
+#home {
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+#home .container {
+  margin: 0;
+}
+
+#home .image {
+  display: flex;
+  justify-content: center;
+}
+
+#home .image::before {
+  content: "";
+  width: 20rem;
+  height: 20rem;
+  border-radius: 0.2rem;
+
+  background: #0c60e7;
+
+  position: absolute;
+  top: 7%;
+  left: 18%;
+  z-index: -1;
+}
+
+#home .image img {
+  width: 20rem;
+  height: auto;
+
+  border-radius: 0.2rem;
+
+  box-shadow: 3px 3px 10px#0c60e7, -3px -3px 10px#0c60e7;
+}
+
+#home .text {
+  margin-top: 2.5rem;
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  text-align: center;
+}
+
+#home .text h1 {
+  margin-bottom: 1rem;
+}
+
+#home .text p {
+  margin-bottom: 2rem;
+  max-width: 100%;
+}
+
+/* ======================================= ABBOUT =================================*/
+
+#about {
+  background: var(--boyd-color);
+}
+
+#about .container {
+  margin: 0;
+}
+
+#about .image::before {
+  content: "";
+  height: 100%;
+  width: 100%;
+  background: var(--base-color-second);
+  position: absolute;
+  top: -1%;
+  left: -50%;
+  z-index: 0;
+}
+
+#about .image img {
+  position: relative;
+
+  max-width: 30rem;
+}
+
+#about .image {
+  margin: auto 1.5rem;
+}
+
+#about .image img,
+#about .image::before {
+  border-radius: 0.25rem;
+}
+
+#about .text {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+
+/* ======================================= PRODUTS =================================*/
+
+#services header {
+  text-align: center;
+  margin-bottom: 1rem;
+
+  max-width: 90vw;
+}
+
+.cards.grid {
+  gap: 1.5rem;
+}
+
+.card {
+  padding: 3rem 3rem;
+  background: linear-gradient(rgba(255, 255, 255, 0) 0%, rgb(27 27 27) 100%);
+
+  text-align: center;
+
+  margin-left: 2rem;
+  margin-right: 2rem;
+
+  border-radius: 0.5rem 0.5rem 0.2rem 0.2rem;
+  background: linear-gradient(145deg, #000000, #222222);
+  box-shadow: 3px 3px 10px #2f0850, -3px -3px 10px #0c60e7;
+}
+
+.card .images {
+  display: block;
+
+  margin-bottom: 0.5rem;
+}
+
+.card .newImages {
+  display: none;
+}
+
+.card .title {
+  display: inline-block;
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+#services a {
+  margin-top: 0.5rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#services img {
+  max-width: 10rem;
+}
+
+/*MENU DAS PEÇAS*/
+
+/* #services .container .cards .bones.show {
+  width: 100%;
+  
+} */
+
+/* ======================================= TESTIMONIALS =================================*/
+
+#testimonials {
+  background: var(--boyd-color);
+}
+
+#testimonials .container {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+#testimonials header {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+#testimonials blockquote {
+  padding: 2rem;
+  background: linear-gradient(rgba(255, 255, 255, 0) 0%, rgb(27 27 27) 100%);
+  box-shadow: 0px 0px 8px var(--base-color);
+  border-bottom: 0.2rem solid var(--base-color);
+  border-radius: 0.25rem;
+
+  width: auto;
+  height: auto;
+  margin: auto 2rem;
+}
+
+#testimonials blockquote p {
+  position: relative;
+  text-indent: 2rem;
+  color: var(--text-color);
+}
+
+#testimonials blockquote p span {
+  font: 700 3rem serif;
+  position: absolute;
+  top: -0.5rem;
+  left: -1.9rem;
+  color: var(--base-color);
+}
+
+#testimonials cite {
+  display: flex;
+  align-items: center;
+  font-style: normal;
+  margin-bottom: 1.5rem;
+}
+
+#testimonials cite img {
+  width: 6.5rem;
+  height: auto;
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ======================================= CONTACT =================================*/
+
+#contact .text h2 {
+  text-align: center;
+}
+
+#contact .grid {
+  gap: 4rem;
+}
+
+#contact .text p {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+#contact .text #contato {
+  display: flex;
+
+  max-width: fit-content;
+
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#contact .button i,
+#contact ul li i {
+  font-size: 1.5rem;
+  margin-right: 0.625rem;
+}
+
+#contact ul.grid {
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+#contact ul li {
+  display: flex;
+  align-items: center;
+}
+
+#contact ul li.title {
+  font-size: 1.5rem;
+  border-left: 0.2rem solid var(--base-color);
+  padding-left: 1rem;
+}
+
+#contact ul li i {
+  color: var(--text-color-light);
+  margin-right: 0;
+}
+
+#contact .contactButton {
+  border: inset #0c60e7(271, 100%, 50%);
+  border-width: 0.15rem 0.15rem 0.15rem 0;
+
+  border-radius: 0.5rem;
+
+  padding: 0.3rem 0.5rem;
+}
+
+/* ======================================= FOOTER =================================*/
+
+footer {
+  background: linear-gradient(var(--base-color-second) 0%, rgb(27 27 27) 100%);
+}
+
+footer.section {
+  padding: 4rem 0;
+}
+
+footer .logo {
+  display: inline-block;
+  margin-bottom: 1.5rem;
+}
+
+footer .brand p {
+  color: var(--text-color-light);
+  margin-bottom: 0.75rem;
+}
+
+footer i {
+  font-size: 1.5rem;
+  color: var(--text-color-light);
+  margin-right: 0.5rem;
+}
+
+footer .social {
+  display: flex;
+  align-items: center;
+}
+
+footer .social a {
+  display: inline-block;
+  transition: 0.3s;
+  margin-right: 4rem;
+
+  color: var(--boyd-color);
+
+  font-size: var(--subtitle-font-size);
+}
+
+footer .social a:hover {
+  transform: translateY(-5px);
+}
+
+/* ======================================= BOTÃO UP =================================*/
+
+.back-top {
+  background: var(--base-color);
+  color: var(--text-color-light);
+
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+
+  padding: 0.5rem;
+  clip-path: circle();
+
+  font-size: 1.5rem;
+  line-height: 0;
+
+  visibility: hidden;
+  opacity: 0;
+
+  transition: 0.3s;
+  transform: translateY(100%);
+}
+
+.back-top.show {
+  visibility: visible;
+  opacity: 1;
+
+  transform: translateY(0);
+}
+
+/* ======================================= RESPONSIVO =================================*/
+
+/*===== MEDIA QUERIES ======*/
+/*extra large devices: 1200> */
+@media (min-width: 1200px) {
+  header .container {
+    margin-left: 5rem;
+    margin-right: 5rem;
+  }
+
+  .section {
+    padding: 7rem 0;
+  }
+
+  #home.section {
+    padding-top: 4rem;
+    padding-bottom: 5rem;
+  }
+
+  #home .promo::before {
+    content: "";
+    height: 100%;
+    width: 80%;
+    border-radius: 0.2rem;
+
+    background: #1030d2;
+    position: absolute;
+    top: -10%;
+    left: -3%;
+    z-index: -1;
+  }
+
+  #home .image::before {
+    visibility: hidden;
+  }
+
+  .section header,
+  #testimonials header {
+    max-width: 32rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  nav .menu {
+    opacity: 1;
+    visibility: visible;
+    top: 0;
+  }
+
+  nav .menu ul {
+    display: flex;
+    gap: 2rem;
+  }
+
+  nav .menu ul li a.title {
+    font: 400 1rem var(--body-font);
+    color: var(--text-color-light);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  nav .icon-menu {
+    display: none;
+  }
+
+  /* HOME */
+
+  #home .image {
+    order: 1;
+    max-width: 30rem;
+  }
+
+  #home .image img {
+    width: auto;
+    height: 30rem;
+    margin-right: 5rem;
+  }
+
+  #home .text {
+    order: 0;
+    max-width: 24rem;
+    text-align: left;
+    margin-right: 5rem;
+  }
+
+  #home .button {
+    display: inline-flex;
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  #home .swiper-pagination.swiper-pagination-bullets {
+    margin-left: -1.5rem;
+  }
+
+  /* BOX SLIDER */
+
+  #testimonials .container {
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  #testimonials blockquote {
+    width: auto;
+    height: 15rem;
+  }
+  /* PRODUTOS */
+  #services .cards {
+    grid-template-columns: 1fr;
+    margin: auto 2rem;
+  }
+
+  /* SOBRE */
+
+  #about .container {
+    margin: 0 auto;
+    grid-auto-flow: column;
+  }
+
+  /* CONTACT */
+  #contact .container {
+    grid-auto-flow: column;
+    align-items: center;
+  }
+
+  #contact .text {
+    max-width: 25rem;
+    padding-left: 5rem;
+  }
+
+  #contact .text h2,
+  #contact .text p {
+    text-align: left;
+  }
+
+  #contact .text #contato {
+    text-align: center;
+    width: 16rem;
+  }
+
+  #contact .text p {
+    margin-bottom: 4rem;
+  }
+
+  footer.section {
+    padding: 3.8rem 0;
+  }
+
+  footer .container {
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 5rem;
+    margin-right: 5rem;
+  }
+
+  footer .social a {
+    margin-left: 5rem;
+    margin-right: auto;
+  }
+
+  main {
+    margin-top: 4.5rem;
+  }
+}
+/* large devices: 1023> */
+
+/* large devices: 992> */
+@media (min-width: 992px) {
+  header .container {
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }
+
+  .section {
+    padding: 7rem 0;
+  }
+
+  .section header,
+  #testimonials header {
+    max-width: 32rem;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  nav .menu {
+    opacity: 1;
+    visibility: visible;
+    top: 0;
+  }
+
+  nav .menu ul {
+    display: flex;
+    gap: 2rem;
+  }
+
+  nav .menu ul li a.title {
+    font: 400 1rem var(--body-font);
+    color: var(--text-color-light);
+  }
+
+  nav .menu ul li a.title.active {
+    font-weight: bold;
+    -webkit-font-smoothing: auto;
+  }
+
+  nav .icon-menu {
+    display: none;
+  }
+
+  /* HOME */
+
+  #home .image {
+    order: 1;
+    max-width: 30rem;
+    margin-left: 5rem;
+  }
+
+  #home .text {
+    order: 0;
+    width: 50%;
+    text-align: left;
+  }
+
+  /*  testimonials */
+  #testimonials blockquote {
+    width: auto;
+    height: 17rem;
+  }
+
+  /* PRODUTOS */
+  #services .cards {
+    grid-template-columns: 1fr;
+    margin: auto 2rem;
+  }
+
+  #services .newImages {
+    display: inline-block;
+  }
+
+  #services .images {
+    display: flex;
+    justify-content: space-evenly;
+  }
+
+  /* SOBRE */
+
+  #about .container {
+    margin: 0 auto;
+    grid-auto-flow: column;
+  }
+
+  /* contato */
+
+  #contact .text h2,
+  #contact .text p {
+    text-align: center;
+  }
+
+  #contact .text #contato {
+    width: 16rem;
+  }
+
+  #contact ul.grid {
+    padding-left: 5rem;
+  }
+
+  footer.section {
+    padding: 3.8rem 0;
+  }
+
+  footer .container {
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 5rem;
+    margin-right: 5rem;
+  }
+
+  footer .social a {
+    margin-left: 5rem;
+    margin-right: auto;
+  }
+}
+/* medium devices: 770> */
+@media (min-width: 760px) {
+  :root {
+    --title-font-size: 2.25rem;
+    --subtitle-font-size: 1.125rem;
+  }
+
+  .section {
+    padding: 6rem 0;
+  }
+
+  #home .homeContent {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  #home .image {
+    order: 1;
+    max-width: 30rem;
+    margin-left: 5rem;
+  }
+
+  #home .image::before {
+    left: auto;
+    right: 5%;
+  }
+
+  #home .text {
+    order: 0;
+    width: 50%;
+    text-align: center;
+  }
+
+  /*  testimonials */
+  #testimonials blockquote {
+    width: auto;
+    height: 18rem;
+  }
+
+  /* SOBRE */
+
+  #about .container {
+    margin: 0 auto;
+    grid-auto-flow: column;
+  }
+
+  #about .image::before {
+    content: "";
+    height: 100%;
+    width: 100%;
+    background: var(--base-color-second);
+    position: absolute;
+
+    left: -50%;
+    z-index: 0;
+  }
+
+  #about .image {
+    margin-left: 1.5rem;
+
+    max-width: 25rem;
+  }
+
+  #about .text {
+    margin: auto 1.5rem;
+  }
+
+  footer.section {
+    padding: 3.8rem 0;
+  }
+
+  footer .container {
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 5rem;
+    margin-right: 5rem;
+  }
+
+  footer .social a {
+    margin-left: 5rem;
+    margin-right: auto;
+  }
+}
